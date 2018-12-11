@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style type="text/css">
+        .dots1 {
+            fill: brown;
+            opacity: 0.8;
+        }
+        .dots2 {
+            fill: royalblue;
+            opacity: 0.8;
+        }
+        .line1 {
+            fill: none;
+            stroke: brown;
+            opacity: 0.8;
+            stroke-width: 1.5;
+        }
+        .line2 {
+            fill: none;
+            stroke: royalblue;
+            opacity: 0.8;
+            stroke-width: 1.5;
+        }
+        .labels {
+            font-size: 24px;
+            text-anchor: middle;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        data = [
+            {
+                "Date": "10/17/17",
+                "Attend": 1,
+                "HomePTS": 111.5
+            },
+            {
+                "Date": "10/18/17",
+                "Attend": 0.972727273,
+                "HomePTS": 107.3636364
+            },
+            {
+                "Date": "10/19/17",
+                "Attend": 0.993333333,
+                "HomePTS": 104.6666667
+            },
+            {
+                "Date": "10/20/17",
+                "Attend": 0.944,
+                "HomePTS": 107.3
+            },
+            {
+                "Date": "10/21/17",
+                "Attend": 0.970909091,
+                "HomePTS": 106.3636364
+            },
+            {
+                "Date": "10/22/17",
+                "Attend": 0.926666667,
+                "HomePTS": 113.6666667
+            },
+            {
+                "Date": "10/23/17",
+                "Attend": 0.84375,
+                "HomePTS": 101
+            },
+            {
+                "Date": "10/24/17",
+                "Attend": 0.901666667,
+                "HomePTS": 111
+            },
+            {
+                "Date": "10/25/17",
+                "Attend": 0.922,
+                "HomePTS": 108.1
+            },
+            {
+                "Date": "10/26/17",
+                "Attend": 0.862,
+                "HomePTS": 97
+            },
+            {
+                "Date": "10/27/17",
+                "Attend": 0.945714286,
+                "HomePTS": 106.4285714
+            },
+            {
+                "Date": "10/28/17",
+                "Attend": 0.95875,
+                "HomePTS": 99
+            },
+            {
+                "Date": "10/29/17",
+                "Attend": 0.901428571,
+                "HomePTS": 102.7142857
+            },
+            {
+                "Date": "10/30/17",
+                "Attend": 0.921111111,
+                "HomePTS": 105.8888889
+            },
+            {
+                "Date": "10/31/17",
+                "Attend": 0.805,
+                "HomePTS": 104.75
+            },
+            {
+                "Date": "11/1/17",
+                "Attend": 0.864166667,
+                "HomePTS": 111
+            },
+            {
+                "Date": "11/2/17",
+                "Attend": 0.965,
+                "HomePTS": 102.5
+            },
+            {
+                "Date": "11/3/17",
+                "Attend": 0.9375,
+                "HomePTS": 105.8333333
+            },
+            {
+                "Date": "11/4/17",
+                "Attend": 0.882,
+                "HomePTS": 104.4
+            },
+            {
+                "Date": "11/5/17",
+                "Attend": 0.918,
+                "HomePTS": 107.9
+            },
+            {
+                "Date": "11/6/17",
+                "Attend": 0.89,
+                "HomePTS": 98.66666667
+            },
+            {
+                "Date": "11/7/17",
+                "Attend": 0.895,
+                "HomePTS": 109.2
+            },
+            {
+                "Date": "11/8/17",
+                "Attend": 0.918,
+                "HomePTS": 114.6
+            },
+            {
+                "Date": "11/9/17",
+                "Attend": 0.986,
+                "HomePTS": 112.2
+            },
+            {
+                "Date": "11/10/17",
+                "Attend": 0.95375,
+                "HomePTS": 97.25
+            },
+            {
+                "Date": "11/11/17",
+                "Attend": 0.951818182,
+                "HomePTS": 116.3636364
+            },
+            {
+                "Date": "11/12/17",
+                "Attend": 0.915,
+                "HomePTS": 103.5
+            },
+            {
+                "Date": "11/13/17",
+                "Attend": 0.894444444,
+                "HomePTS": 103.5555556
+            },
+            {
+                "Date": "11/14/17",
+                "Attend": 0.98,
+                "HomePTS": 102
+            },
+            {
+                "Date": "11/15/17",
+                "Attend": 0.926363636,
+                "HomePTS": 105.2727273
+            },
+            {
+                "Date": "11/16/17",
+                "Attend": 0.965,
+                "HomePTS": 104
+            },
+            {
+                "Date": "11/17/17",
+                "Attend": 0.933636364,
+                "HomePTS": 108.8181818
+            },
+            {
+                "Date": "11/18/17",
+                "Attend": 0.968571429,
+                "HomePTS": 99.71428571
+            },
+            {
+                "Date": "11/19/17",
+                "Attend": 0.951666667,
+                "HomePTS": 107.1666667
+            },
+            {
+                "Date": "11/20/17",
+                "Attend": 0.931818182,
+                "HomePTS": 100.6363636
+            },
+            {
+                "Date": "11/21/17",
+                "Attend": 1,
+                "HomePTS": 103
+            },
+            {
+                "Date": "11/22/17",
+                "Attend": 0.933571429,
+                "HomePTS": 110.8571429
+            },
+            {
+                "Date": "11/24/17",
+                "Attend": 0.939,
+                "HomePTS": 109.9
+            },
+            {
+                "Date": "11/25/17",
+                "Attend": 0.939,
+                "HomePTS": 103.7
+            },
+            {
+                "Date": "11/26/17",
+                "Attend": 0.866666667,
+                "HomePTS": 100
+            },
+            {
+                "Date": "11/27/17",
+                "Attend": 0.92125,
+                "HomePTS": 108.625
+            },
+            {
+                "Date": "11/28/17",
+                "Attend": 0.886,
+                "HomePTS": 97.8
+            },
+            {
+                "Date": "11/29/17",
+                "Attend": 0.931,
+                "HomePTS": 116.2
+            },
+            {
+                "Date": "11/30/17",
+                "Attend": 0.894,
+                "HomePTS": 106.2
+            },
+            {
+                "Date": "12/1/17",
+                "Attend": 0.9425,
+                "HomePTS": 107
+            },
+            {
+                "Date": "12/2/17",
+                "Attend": 0.93125,
+                "HomePTS": 111.25
+            },
+            {
+                "Date": "12/3/17",
+                "Attend": 0.926,
+                "HomePTS": 98.4
+            },
+            {
+                "Date": "12/4/17",
+                "Attend": 0.871818182,
+                "HomePTS": 105.0909091
+            },
+            {
+                "Date": "12/5/17",
+                "Attend": 0.976666667,
+                "HomePTS": 106
+            },
+            {
+                "Date": "12/6/17",
+                "Attend": 0.902,
+                "HomePTS": 104.3
+            },
+            {
+                "Date": "12/7/17",
+                "Attend": 0.953333333,
+                "HomePTS": 101.3333333
+            },
+            {
+                "Date": "12/8/17",
+                "Attend": 0.87375,
+                "HomePTS": 104.25
+            },
+            {
+                "Date": "12/9/17",
+                "Attend": 0.91,
+                "HomePTS": 108.2222222
+            },
+            {
+                "Date": "12/10/17",
+                "Attend": 0.883333333,
+                "HomePTS": 105.5
+            },
+            {
+                "Date": "12/11/17",
+                "Attend": 0.918333333,
+                "HomePTS": 105.67
+            },
+            {
+                "Date": "12/12/17",
+                "Attend": 0.9,
+                "HomePTS": 104.1428571
+            },
+            {
+                "Date": "12/13/17",
+                "Attend": 0.891111111,
+                "HomePTS": 104.1111111
+            },
+            {
+                "Date": "12/14/17",
+                "Attend": 0.88,
+                "HomePTS": 109.4
+            },
+            {
+                "Date": "12/15/17",
+                "Attend": 0.894545455,
+                "HomePTS": 105.6363636
+            },
+            {
+                "Date": "12/16/17",
+                "Attend": 0.96375,
+                "HomePTS": 101.625
+            },
+            {
+                "Date": "12/17/17",
+                "Attend": 0.8925,
+                "HomePTS": 104.5
+            },
+            {
+                "Date": "12/18/17",
+                "Attend": 0.907,
+                "HomePTS": 108.4
+            },
+            {
+                "Date": "12/19/17",
+                "Attend": 0.933333333,
+                "HomePTS": 110
+            },
+            {
+                "Date": "12/20/17",
+                "Attend": 0.909166667,
+                "HomePTS": 103.25
+            },
+            {
+                "Date": "12/21/17",
+                "Attend": 0.978,
+                "HomePTS": 104.6
+            },
+            {
+                "Date": "12/22/17",
+                "Attend": 0.946666667,
+                "HomePTS": 108.6666667
+            },
+            {
+                "Date": "12/23/17",
+                "Attend": 0.949230769,
+                "HomePTS": 105.4615385
+            },
+            {
+                "Date": "12/25/17",
+                "Attend": 1,
+                "HomePTS": 103.2
+            },
+            {
+                "Date": "12/26/17",
+                "Attend": 0.9475,
+                "HomePTS": 106.875
+            },
+            {
+                "Date": "12/27/17",
+                "Attend": 0.979,
+                "HomePTS": 110.4
+            },
+            {
+                "Date": "12/28/17",
+                "Attend": 0.996,
+                "HomePTS": 107.2
+            },
+            {
+                "Date": "12/29/17",
+                "Attend": 0.976666667,
+                "HomePTS": 106.6666667
+            },
+            {
+                "Date": "12/30/17",
+                "Attend": 0.967142857,
+                "HomePTS": 108.2857143
+            },
+            {
+                "Date": "12/31/17",
+                "Attend": 0.97625,
+                "HomePTS": 110.625
+            }
+        ];
+
+        var w = 900;
+        var h = 550;
+        var margin = { top:80, right: 65, bottom: 60, left: 65 };
+        var svg = d3.select("body")
+            .append("svg")
+            .attr("transform", "translate (220, 100)")
+            .attr("width", w)
+            .attr("height", h);
+
+        var innerWidth = w - margin.left - margin.right
+        var innerHeight = h - margin.top - margin.bottom
+        var g = svg.append("g").attr("class", "plot")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+        // Title
+        g.append("text").attr("x", margin.left).attr("y", -50).text("Attendence rates v.s. average points in 2017").attr("font-size", 36)
+
+        // Scale
+        var parse = d3.timeParse("%m/%d/%y");
+        var xScale = d3.scaleTime().range([0, innerWidth]);
+        var yScale = d3.scaleLinear()
+            .domain([0.5, 1])
+            .range([innerHeight, 0]);
+
+        var yScale2 = d3.scaleLinear()
+            .domain([90, 130])
+            .range([innerHeight, 0]);
+
+        data.forEach(function (d) {
+            d.Date = parse(d.Date);
+        });
+
+        xScale.domain(d3.extent(data, d => d.Date));
+
+        // Axis
+        g.append("g").attr("class", "xAxis")
+            .attr("transform", `translate(0, ${innerHeight})`)
+            .call(d3.axisBottom(xScale).ticks(7));
+
+        g.append("g").attr("class", "yAxis_major")
+            .call(d3.axisLeft(yScale));
+
+        g.append("g").attr("class", "yAxis_secondary")
+            .attr("transform", `translate(${innerWidth}, 0)`)
+            .call(d3.axisRight(yScale2));
+
+        // Axis label
+        var labels = g.append("g").attr("class", "labels");
+        labels.append("text")
+            .attr("transform", `translate(${innerWidth/2-10}, ${innerHeight+50})`)
+            .text("Date");
+
+        labels.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", -50)
+            .attr("x", 0 - (innerHeight/2))
+            .text("Attendence rate");
+
+        labels.append("text")
+            .attr("transform", "rotate(+90)")
+            .attr("y", -innerWidth-50)
+            .attr("x", innerHeight/2)
+            .text("Average points");
+
+
+        // Dots
+        var circ1 = g.append("g").attr("class", "dots1")
+            .selectAll("circle")
+            .data(data).enter()
+            .append("circle")
+            .attr("cx", d => xScale(d.Date))
+            .attr("cy", d => yScale(d.Attend))
+            .transition()
+            .delay((d, i) => i*100)
+            .duration(10)
+            .attr("r", 3)
+            .attr("id", (d, i) => i);
+
+        var circ2 = g.append("g").attr("class", "dots2")
+            .selectAll("circle")
+            .data(data).enter()
+            .append("circle")
+            .attr("cx", d => xScale(d.Date))
+            .attr("cy", d => yScale2(d.HomePTS))
+            .transition()
+            .delay((d, i) => i*100)
+            .duration(10)
+            .attr("r", 3)
+            .attr("id", (d, i) => i);
+
+        // Lines
+        var line1 = d3.line()
+            .x(d => xScale(d.Date))
+            .y(d => yScale(d.Attend))
+            .curve(d3.curveCardinal);
+
+        var line2 = d3.line()
+            .x(d => xScale(d.Date))
+            .y(d => yScale2(d.HomePTS))
+            .curve(d3.curveCardinal);
+
+        var lines = g.append("g").attr("class", "lines");
+        var path1 = lines.append("path").attr("class", "line1")
+            .attr("d", line1(data));
+
+        var path2 = lines.append("path").attr("class", "line2")
+            .attr("d", line2(data));
+
+        var totalLength1 = path1.node().getTotalLength();
+        var totalLength2 = path2.node().getTotalLength();
+
+        path1.attr("stroke-dasharray", totalLength1 + " " + totalLength1)
+            .attr("stroke-dashoffset", totalLength1)
+            .transition()
+            .duration(6000)
+            .ease(d3.easeLinear)
+            .attr("stroke-dashoffset", 0);
+
+        path2.attr("stroke-dasharray", totalLength2 + " " + totalLength2)
+            .attr("stroke-dashoffset", totalLength2)
+            .transition()
+            .duration(6000)
+            .ease(d3.easeLinear)
+            .attr("stroke-dashoffset", 0);
+
+        // Lable Box
+        var dp = g.append("g").attr("class", "data_point");
+        dp.append("text").attr("id", "attend");
+        dp.append("text").attr("id", "pts");
+
+        dp.append("rect").attr("id", "attend")
+            .attr("width", 71)
+            .attr("height", 20)
+            .attr("fill", "none");
+
+        dp.append("rect").attr("id", "pts")
+            .attr("width", 85)
+            .attr("height", 20)
+            .attr("fill", "none");
+
+        dp.append("line").attr("id", "grid")
+            .attr("x1", 0)
+            .attr("y1", innerHeight)
+            .attr("x2", 0)
+            .attr("y2", 0)
+            .attr("stroke-width", 1.5)
+            .attr("stroke", "grey")
+            .attr("fill", "none");
+
+        // animation
+        var circ = d3.selectAll("circle")
+        circ.on("mousemove", show).on("mouseout", remove)
+        function show() {
+            var point = d3.select(this);
+            var array = point.data()[0];
+            var mouse = d3.mouse(this);
+            var dots = d3.selectAll(`circle[id= '${point.attr("id")}']`)
+
+            dots.attr("r", 6).attr("stroke", "grey").attr("stroke-width", 1);
+            d3.select("text#attend")
+                .attr("x", mouse[0]+10).attr("y", yScale(array.Attend))
+                .text(`Attd:${array.Attend.toFixed(2)}`);
+
+            d3.select("rect#attend")
+                .attr("x", mouse[0] + 5).attr("y", yScale(array.Attend)-15)
+                .attr("fill", "grey")
+                .attr("opacity", 0.3);
+
+            d3.select("text#pts")
+                .attr("x", mouse[0]+10).attr("y", yScale2(array.HomePTS))
+                .text(`PTS:${array.HomePTS.toFixed(2)}`);
+
+            d3.select("rect#pts")
+                .attr("x", mouse[0]+5).attr("y", yScale2(array.HomePTS)-15)
+                .attr("fill", "grey")
+                .attr("opacity", 0.3);
+
+            d3.select("line#grid")
+                .transition()
+                .duration(10)
+                .attr("x1", mouse[0])
+                .attr("y1", innerHeight)
+                .attr("x2", mouse[0])
+                .attr("y2", -20);
+        };
+
+        function remove() {
+            d3.selectAll("circle").attr("r", 3).attr("stroke-width", 0);
+            d3.selectAll("text#attend").text();
+            d3.selectAll("text#pts").text();
+        };
+
+    </script>
+
+</body>
+
+</html>
